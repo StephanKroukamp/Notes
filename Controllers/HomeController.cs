@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Notes.Data;
+using Notes.Entities;
 using Notes.Models;
 
 namespace Notes.Controllers
@@ -8,13 +10,27 @@ namespace Notes.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private DataContext _context;
+
+        public HomeController(ILogger<HomeController> logger, DataContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            Note note = new Note
+            {
+                Title = "test title",
+                Content = "test content"
+            };
+
+
+            _context.Notes.Add(note);
+
+            _context.SaveChanges();
+
             return View();
         }
 
