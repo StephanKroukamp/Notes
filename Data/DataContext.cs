@@ -7,6 +7,8 @@ namespace Notes.Data
     {
         public DbSet<Note> Notes { get; set; }
 
+        public DbSet<NoteItem> NoteItems { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Notepad;Integrated Security=True");

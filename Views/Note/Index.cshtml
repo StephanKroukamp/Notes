@@ -1,0 +1,58 @@
+﻿@model List<Note>
+
+@{
+    ViewData["Title"] = "Notes";
+}
+
+<section>
+    <div class="container">
+
+        <div class="text-center">
+            <h1 class="display-4">Notes</h1>
+
+        </div>
+
+        <hr />
+
+        @Html.ActionLink("New Note", "Create", "Note", null, htmlAttributes: new { @class = "btn btn-primary" })
+
+        <hr />
+
+        <div class="row-6">
+            @foreach (Note note in Model)
+            {
+                <div class="col-12">
+                    <div class="card rounded-3">
+                        <div class="card-body">
+
+                            <p class="mb-2">
+                                <span class="h2">@note.Title</span>
+                                @Html.ActionLink("Edit", "Edit", "Note", new { noteId = note.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Delete", "Delete", "Note", new { noteId = note.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+                            </p>
+                            <p class="text-muted pb-2">@note.CreatedDate.ToString("yyyy-MM-dd:HH:mm")</p>
+
+                            @Html.ActionLink("New Item", "CreateNoteItem", "Note", new { noteId = note.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+
+                            <ul class="list-group">
+                                @foreach (NoteItem noteItem in note.NoteItems)
+                                {
+                                    <li class="list-group-item">
+                                        @Html.EditorFor(m => noteItem.Checked, new { @class = "form-check-input", type="checkbox" })
+
+                                        <span>@noteItem.Title</span>
+
+                                        @Html.ActionLink("Edit", "Edit", "Note", new { noteItemId = noteItem.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                                        @Html.ActionLink("Delete", "Delete", "Note", new { noteItemId = noteItem.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+            }
+        </div>
+    </div>
+</section>

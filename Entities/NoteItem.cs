@@ -1,6 +1,6 @@
 ﻿namespace Notes.Entities
 {
-    public class Note
+    public class NoteItem
     {
         public int Id { get; set; }
 
@@ -8,6 +8,10 @@
 
         public DateTimeOffset CreatedDate { get; set; }
 
-        public ICollection<NoteItem> NoteItems{get; set;}
+        public bool Checked { get; set; }
+
+        public int NoteId { get; set; }
+
+        public Note Note { get; set; }
     }
 }
